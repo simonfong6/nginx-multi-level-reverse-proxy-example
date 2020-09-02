@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  proxy:
+    image: nginx
+    volumes:
+      - ./proxy/confs:/etc/nginx/conf.d
+      - ./proxy/html:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_PORT=80
+  kubernetes:
+    image: nginx
+    volumes:
+      - ./kubernetes/html:/usr/share/nginx/html
+      - ./kubernetes/confs:/etc/nginx/conf.d/
+    environment:
+      - NGINX_PORT=80
+  left:
+    image: nginx
+    volumes:
+      - ./left/html:/usr/share/nginx/html
+      - ./left/confs:/etc/nginx/conf.d/
+    environment:
+      - NGINX_PORT=80
+  right:
+    image: nginx
+    volumes:
+      - ./right/html:/usr/share/nginx/html
+      - ./right/confs:/etc/nginx/conf.d/
+    environment:
+      - NGINX_PORT=80
